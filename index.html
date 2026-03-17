@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Dudus online web-portal (se Dudu meatspin)">
+    <meta name="keywords" content="Dudu Meatspin, Duduonline, dudu online, dudumeatspin">
     <title>Magic Dudu</title>
     <style>
         body {
@@ -50,6 +52,7 @@
             box-shadow: 0 10px 25px rgba(0,0,0,0.1);
             margin-top: 40px;
             margin-bottom: 50px;
+            pointer-events: none; /* Gør det sværere at højreklikke direkte på tallet */
         }
 
         @keyframes spin {
@@ -70,19 +73,36 @@
 
     <script>
         (function() {
-            // Vi gemmer starttiden i en konstant, der ikke kan ændres
             const startTime = Date.now();
             const timerElement = document.getElementById('timer');
             const shrimp = document.getElementById('shrimp');
 
-            // Opdater timer baseret på reel tid gået
-            setInterval(() => {
+            // Funktion til at beregne og sætte den korrekte tid
+            const updateTimer = () => {
                 const now = Date.now();
                 const differenceInSeconds = Math.floor((now - startTime) / 1000);
-                timerElement.innerText = "Tid på siden: " + differenceInSeconds + "s";
-            }, 100); // Vi opdaterer oftere for at gøre det svært at overskrive teksten
+                const correctText = "Tid på siden: " + differenceInSeconds + "s";
+                
+                if (timerElement.innerText !== correctText) {
+                    timerElement.innerText = correctText;
+                }
+            };
 
-            // Spin funktioner
+            // 1. Vagthund: Tjekker hvert 50. millisekund (meget hurtigt)
+            setInterval(updateTimer, 50);
+
+            // 2. Vagthund (MutationObserver): Reagerer med det samme hvis nogen ændrer i HTML'en
+            const observer = new MutationObserver(() => {
+                updateTimer();
+            });
+
+            observer.observe(timerElement, {
+                characterData: true,
+                childList: true,
+                subtree: true
+            });
+
+            // Spin logik (uændret)
             const startFast = () => shrimp.classList.add('fast-spin');
             const stopFast = () => shrimp.classList.remove('fast-spin');
 
@@ -91,6 +111,10 @@
             shrimp.onmouseleave = stopFast;
             shrimp.ontouchstart = startFast;
             shrimp.ontouchend = stopFast;
+
+            // Blokér højreklik på selve rejen og timeren for at gøre det sværere at finde "Inspect"
+            shrimp.oncontextmenu = (e) => e.preventDefault();
+            timerElement.oncontextmenu = (e) => e.preventDefault();
         })();
     </script>
 
