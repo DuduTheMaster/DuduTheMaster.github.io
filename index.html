@@ -12,53 +12,59 @@
             background-color: #f4f4f4;
             display: flex;
             flex-direction: column;
-            align-items: center;
+            justify-content: center; /* Centrerer lodret */
+            align-items: center; /* Centrerer vandret */
+            min-height: 100vh;
+            margin: 0;
             padding: 20px;
+            overflow: hidden; /* Forhindrer scroll hvis rejen går amok */
         }
 
-        .grid-container {
-            display: grid;
-            grid-template-columns: auto auto; 
-            align-items: center; 
-            gap: 30px;
-            margin-top: 20px;
-        }
-
-        .shrimp-box {
+        .shrimp-container {
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
         }
 
-        video {
-            max-width: 100%;
+        /* Rejen er nu gjort større (500px) */
+        .rotating-shrimp {
+            width: 500px; 
+            max-width: 90vw;
             height: auto;
-            border-radius: 12px;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            cursor: pointer;
+            transition: transform 0.2s;
+            animation: spin 3s linear infinite; /* Standard hastighed */
+            user-select: none; /* Forhindrer at man markerer billedet ved klik */
         }
 
-        .rotating-shrimp {
-            max-width: 180px;
-            height: auto;
-            animation: spin 3s linear infinite;
-            margin-bottom: 10px;
+        /* Denne klasse tilføjes via JavaScript når man klikker */
+        .fast-spin {
+            animation: spin 0.1s linear infinite !important;
         }
 
         #timer {
-            font-size: 1.2rem;
+            font-size: 2rem;
             font-weight: bold;
             color: #333;
             background: white;
-            padding: 10px 15px;
-            border-radius: 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 15px 30px;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-top: 30px;
         }
 
         @keyframes spin {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
+
+        h1, p {
+            position: absolute;
+            top: 20px;
+            text-align: center;
+        }
+        p { top: 80px; }
     </style>
 </head>
 <body>
@@ -66,19 +72,22 @@
     <h1>Den 05/05-2026 udkommer afsnit 3 af Minecraft ifølge religioner</h1>
     <p>Alex Missen slap af.</p>
 
-    <div class="grid-container">
-        <video width="800" controls>
-            <source src="videoplayback.mp4" type="video/mp4">
-            Din browser understøtter ikke video.
-        </video>
+    <div class="shrimp-container">
+        <img src="shrimp.png" 
+             alt="Roterende reje" 
+             class="rotating-shrimp" 
+             id="shrimp"
+             onmousedown="startFastSpin()" 
+             onmouseup="stopFastSpin()"
+             onmouseleave="stopFastSpin()"
+             ontouchstart="startFastSpin()" 
+             ontouchend="stopFastSpin()">
 
-        <div class="shrimp-box">
-            <img src="shrimp.png" alt="Roterende reje" class="rotating-shrimp">
-            <div id="timer">Tid på siden: 0s</div>
-        </div>
+        <div id="timer">Tid på siden: 0s</div>
     </div>
 
     <script>
+        // Timer logik
         let seconds = 0;
         const timerElement = document.getElementById('timer');
 
@@ -86,6 +95,17 @@
             seconds++;
             timerElement.innerText = "Tid på siden: " + seconds + "s";
         }, 1000);
+
+        // Spin logik
+        const shrimp = document.getElementById('shrimp');
+
+        function startFastSpin() {
+            shrimp.classList.add('fast-spin');
+        }
+
+        function stopFastSpin() {
+            shrimp.classList.remove('fast-spin');
+        }
     </script>
 
 </body>
