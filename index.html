@@ -24,7 +24,6 @@
             margin-top: 20px;
         }
 
-        /* Container til reje og timer, så de står under hinanden */
         .shrimp-box {
             display: flex;
             flex-direction: column;
@@ -42,7 +41,7 @@
         .rotating-shrimp {
             max-width: 180px;
             height: auto;
-            animation: spin 3s linear infinite; /* Den spinner lidt hurtigere nu! */
+            animation: spin 3s linear infinite;
             margin-bottom: 10px;
         }
 
@@ -74,7 +73,7 @@
         </video>
 
         <div class="shrimp-box">
-            <img src="shrimp-swimming-isolated-on-transparent-background-png-772634619.png" alt="Roterende reje" class="rotating-shrimp">
+            <img src="shrimp.png" alt="Roterende reje" class="rotating-shrimp">
             <div id="timer">Tid på siden: 0s</div>
         </div>
     </div>
@@ -83,7 +82,6 @@
         let seconds = 0;
         const timerElement = document.getElementById('timer');
 
-        // Opdaterer timeren hvert sekund
         setInterval(() => {
             seconds++;
             timerElement.innerText = "Tid på siden: " + seconds + "s";
