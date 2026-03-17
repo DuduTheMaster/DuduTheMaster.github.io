@@ -5,51 +5,88 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Magic JeppeMis</title>
     <style>
-        /* Container til at holde video og reje side om side */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
         .grid-container {
             display: grid;
-            grid-template-columns: auto auto; /* To kolonner med automatisk bredde */
-            align-items: center; /* Centrerer indhold vertikalt */
-            gap: 20px; /* Tilføjer mellemrum mellem video og reje */
+            grid-template-columns: auto auto; 
+            align-items: center; 
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        /* Container til reje og timer, så de står under hinanden */
+        .shrimp-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
         }
 
         video {
             max-width: 100%;
             height: auto;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
         }
 
-        /* Styling og animation for rejebilledet */
         .rotating-shrimp {
-            max-width: 200px; /* Juster størrelsen efter behov */
+            max-width: 180px;
             height: auto;
-            animation: spin 5s linear infinite; /* Kører animationen 'spin' i 5 sekunder, lineært og uendeligt */
+            animation: spin 3s linear infinite; /* Den spinner lidt hurtigere nu! */
+            margin-bottom: 10px;
         }
 
-        /* Definition af animationen 'spin' */
+        #timer {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #333;
+            background: white;
+            padding: 10px 15px;
+            border-radius: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
         @keyframes spin {
-            from {
-                transform: rotate(0deg);
-            }
-            to {
-                transform: rotate(360deg);
-            }
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
     </style>
 </head>
 <body>
-    <h1>Den 05/05-2026 vil der udkomme afsnit 3 af Minecraft ifølge religioner, denne gang med en "jøde" edition.</h1>
+
+    <h1>Den 05/05-2026 udkommer afsnit 3 af Minecraft ifølge religioner</h1>
     <p>Alex Missen slap af.</p>
 
     <div class="grid-container">
-        <video width="800" controls poster="placeholder-billede.jpg">
+        <video width="800" controls>
             <source src="videoplayback.mp4" type="video/mp4">
-            Din browser understøtter ikke afspilning af video.
+            Din browser understøtter ikke video.
         </video>
 
-        <img src="shrimp.png" alt="Roterende reje" class="rotating-shrimp">
+        <div class="shrimp-box">
+            <img src="shrimp-swimming-isolated-on-transparent-background-png-772634619.png" alt="Roterende reje" class="rotating-shrimp">
+            <div id="timer">Tid på siden: 0s</div>
+        </div>
     </div>
+
+    <script>
+        let seconds = 0;
+        const timerElement = document.getElementById('timer');
+
+        // Opdaterer timeren hvert sekund
+        setInterval(() => {
+            seconds++;
+            timerElement.innerText = "Tid på siden: " + seconds + "s";
+        }, 1000);
+    </script>
 
 </body>
 </html>
