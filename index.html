@@ -12,59 +12,62 @@
             background-color: #f4f4f4;
             display: flex;
             flex-direction: column;
-            justify-content: center; /* Centrerer lodret */
-            align-items: center; /* Centrerer vandret */
+            align-items: center;
             min-height: 100vh;
             margin: 0;
-            padding: 20px;
-            overflow: hidden; /* Forhindrer scroll hvis rejen går amok */
+            padding: 40px 20px;
+            overflow-x: hidden; /* Forhindrer vandret scroll */
+        }
+
+        h1 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        p {
+            margin-bottom: 50px; /* Skaber afstand ned til rejen */
+            text-align: center;
         }
 
         .shrimp-container {
             display: flex;
             flex-direction: column;
             align-items: center;
-            text-align: center;
+            justify-content: center;
+            flex-grow: 1; /* Udfylder pladsen så rejen kommer længere ned */
         }
 
-        /* Rejen er nu gjort større (500px) */
         .rotating-shrimp {
             width: 500px; 
-            max-width: 90vw;
+            max-width: 85vw;
             height: auto;
             cursor: pointer;
-            transition: transform 0.2s;
-            animation: spin 3s linear infinite; /* Standard hastighed */
-            user-select: none; /* Forhindrer at man markerer billedet ved klik */
+            animation: spin 3s linear infinite;
+            user-select: none;
+            -webkit-user-drag: none;
         }
 
-        /* Denne klasse tilføjes via JavaScript når man klikker */
         .fast-spin {
             animation: spin 0.1s linear infinite !important;
         }
 
         #timer {
-            font-size: 2rem;
+            font-size: 2.5rem; /* Gjort lidt større */
             font-weight: bold;
             color: #333;
             background: white;
-            padding: 15px 30px;
-            border-radius: 50px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            margin-top: 30px;
+            padding: 20px 40px;
+            border-radius: 60px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            margin-top: 40px;
+            margin-bottom: 50px;
         }
 
         @keyframes spin {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
-
-        h1, p {
-            position: absolute;
-            top: 20px;
-            text-align: center;
-        }
-        p { top: 80px; }
     </style>
 </head>
 <body>
@@ -87,7 +90,6 @@
     </div>
 
     <script>
-        // Timer logik
         let seconds = 0;
         const timerElement = document.getElementById('timer');
 
@@ -96,7 +98,6 @@
             timerElement.innerText = "Tid på siden: " + seconds + "s";
         }, 1000);
 
-        // Spin logik
         const shrimp = document.getElementById('shrimp');
 
         function startFastSpin() {
