@@ -5,11 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Magic JeppeMis</title>
     <style>
+        /* Container til at holde video og reje side om side */
+        .grid-container {
+            display: grid;
+            grid-template-columns: auto auto; /* To kolonner med automatisk bredde */
+            align-items: center; /* Centrerer indhold vertikalt */
+            gap: 20px; /* Tilføjer mellemrum mellem video og reje */
+        }
+
         video {
             max-width: 100%;
             height: auto;
-            border-radius: 8px; /* Gør hjørnerne lidt bløde */
+            border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        /* Styling og animation for rejebilledet */
+        .rotating-shrimp {
+            max-width: 200px; /* Juster størrelsen efter behov */
+            height: auto;
+            animation: spin 5s linear infinite; /* Kører animationen 'spin' i 5 sekunder, lineært og uendeligt */
+        }
+
+        /* Definition af animationen 'spin' */
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
         }
     </style>
 </head>
@@ -17,10 +42,14 @@
     <h1>Den 05/05-2026 vil der udkomme afsnit 3 af Minecraft ifølge religioner, denne gang med en "jøde" edition.</h1>
     <p>Alex Missen slap af.</p>
 
-    <video width="800" controls poster="placeholder-billede.jpg">
-        <source src="videoplayback.mp4" type="video/mp4">
-        Din browser understøtter ikke afspilning af video.
-    </video>
+    <div class="grid-container">
+        <video width="800" controls poster="placeholder-billede.jpg">
+            <source src="videoplayback.mp4" type="video/mp4">
+            Din browser understøtter ikke afspilning af video.
+        </video>
+
+        <img src="shrimp.png" alt="Roterende reje" class="rotating-shrimp">
+    </div>
 
 </body>
 </html>
