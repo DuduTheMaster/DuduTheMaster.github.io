@@ -22,11 +22,18 @@
         h1 { margin-bottom: 10px; text-align: center; }
         p { margin-bottom: 50px; text-align: center; }
 
-        /* NYE STYLES TIL KANALER - Tilføjet uden at ændre dine gamle */
+        /* Kanal knapper styling */
         .channel-nav { margin-bottom: 20px; display: flex; gap: 10px; }
-        .channel-btn { padding: 10px 15px; cursor: pointer; border-radius: 5px; border: 1px solid #ccc; background: white; }
-        .channel-btn:hover { background: #e0e0e0; }
-        .channel-text { display: none; text-align: center; }
+        .channel-btn { 
+            padding: 10px 20px; 
+            cursor: pointer; 
+            border-radius: 5px; 
+            border: 1px solid #333; 
+            background: #fff;
+            font-weight: bold;
+        }
+        
+        .channel-content { display: none; text-align: center; margin-bottom: 20px; }
         .active-channel { display: block; }
 
         .shrimp-container {
@@ -59,7 +66,7 @@
             box-shadow: 0 10px 25px rgba(0,0,0,0.1);
             margin-top: 40px;
             margin-bottom: 50px;
-            pointer-events: none;
+            pointer-events: none; 
         }
 
         @keyframes spin {
@@ -74,16 +81,24 @@
     <p>Alex Missen slap af.</p>
 
     <div class="channel-nav">
-        <button class="channel-btn" onclick="openChan('alex-c')">Alex</button>
-        <button class="channel-btn" onclick="openChan('ralle-c')">Rallemis</button>
-        <button class="channel-btn" onclick="openChan('jeppe-c')">Jeppemis</button>
-        <button class="channel-btn" onclick="openChan('bia-c')">Biamis</button>
+        <button class="channel-btn" onclick="openChan('alex')">Alex</button>
+        <button class="channel-btn" onclick="openChan('rallemis')">Rallemis</button>
+        <button class="channel-btn" onclick="openChan('jeppemis')">Jeppemis</button>
+        <button class="channel-btn" onclick="openChan('biamis')">Biamis</button>
     </div>
 
-    <div id="alex-c" class="channel-text active-channel"><h3>Alex Kanal</h3><p>Velkommen til Alex' område.</p></div>
-    <div id="ralle-c" class="channel-text"><h3>Rallemis Kanal</h3><p>Her styrer Rallemis!</p></div>
-    <div id="jeppe-c" class="channel-text"><h3>Jeppemis Kanal</h3><p>Jeppemis' private chat.</p></div>
-    <div id="bia-c" class="channel-text"><h3>Biamis Kanal</h3><p>Biamis' hemmeligheder her.</p></div>
+    <div id="alex" class="channel-content active-channel">
+        <p>Her er teksten til Alex</p>
+    </div>
+    <div id="rallemis" class="channel-content">
+        <p>Her er teksten til Rallemis</p>
+    </div>
+    <div id="jeppemis" class="channel-content">
+        <p>Her er teksten til Jeppemis</p>
+    </div>
+    <div id="biamis" class="channel-content">
+        <p>Her er teksten til Biamis</p>
+    </div>
 
     <div class="shrimp-container">
         <img src="shrimp.png" alt="Roterende reje" class="rotating-shrimp" id="shrimp">
@@ -91,14 +106,15 @@
     </div>
 
     <script>
-        // NY FUNKTION TIL KANALER
+        // Logik til at skifte kanal
         function openChan(id) {
-            var i, x = document.getElementsByClassName("channel-text");
-            for (i = 0; i < x.length; i++) { x[i].style.display = "none"; }
+            var i, x = document.getElementsByClassName("channel-content");
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
             document.getElementById(id).style.display = "block";
         }
 
-        // DIN ORIGINALE KODE HERUNDER (UÆNDRET)
         (function() {
             const startTime = Date.now();
             const timerElement = document.getElementById('timer');
