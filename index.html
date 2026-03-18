@@ -24,17 +24,20 @@
 
         /* Kanal knapper styling */
         .channel-nav { margin-bottom: 20px; display: flex; gap: 10px; }
-        .channel-btn { 
+        .channel-link { 
             padding: 10px 20px; 
             cursor: pointer; 
             border-radius: 5px; 
             border: 1px solid #333; 
             background: #fff;
             font-weight: bold;
+            text-decoration: none;
+            color: black;
+            display: inline-block;
         }
-        
-        .channel-content { display: none; text-align: center; margin-bottom: 20px; }
-        .active-channel { display: block; }
+        .channel-link:hover {
+            background: #e0e0e0;
+        }
 
         .shrimp-container {
             display: flex;
@@ -81,23 +84,10 @@
     <p>Alex Missen slap af.</p>
 
     <div class="channel-nav">
-        <button class="channel-btn" onclick="openChan('alex')">Alex</button>
-        <button class="channel-btn" onclick="openChan('rallemis')">Rallemis</button>
-        <button class="channel-btn" onclick="openChan('jeppemis')">Jeppemis</button>
-        <button class="channel-btn" onclick="openChan('biamis')">Biamis</button>
-    </div>
-
-    <div id="alex" class="channel-content active-channel">
-        <p>Her er teksten til Alex</p>
-    </div>
-    <div id="rallemis" class="channel-content">
-        <p>Her er teksten til Rallemis</p>
-    </div>
-    <div id="jeppemis" class="channel-content">
-        <p>Her er teksten til Jeppemis</p>
-    </div>
-    <div id="biamis" class="channel-content">
-        <p>Her er teksten til Biamis</p>
+        <a href="alex.html" class="channel-link">Alex</a>
+        <a href="rallemis.html" class="channel-link">Rallemis</a>
+        <a href="jeppemis.html" class="channel-link">Jeppemis</a>
+        <a href="biamis.html" class="channel-link">Biamis</a>
     </div>
 
     <div class="shrimp-container">
@@ -106,15 +96,6 @@
     </div>
 
     <script>
-        // Logik til at skifte kanal
-        function openChan(id) {
-            var i, x = document.getElementsByClassName("channel-content");
-            for (i = 0; i < x.length; i++) {
-                x[i].style.display = "none";
-            }
-            document.getElementById(id).style.display = "block";
-        }
-
         (function() {
             const startTime = Date.now();
             const timerElement = document.getElementById('timer');
