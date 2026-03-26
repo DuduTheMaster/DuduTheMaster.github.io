@@ -3,140 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Dudus online web-portal (se Dudu meatspin)">
-    <meta name="keywords" content="Dudu Meatspin, Duduonline, dudu online, dudumeatspin">
-    <title>Magic Dudu</title>
+    <title>Leaderboard</title>
+
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: Arial, sans-serif;
             background-color: #f4f4f4;
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            padding: 40px 20px;
-            overflow-x: hidden;
-        }
-
-        h1 { margin-bottom: 10px; text-align: center; }
-        p { margin-bottom: 50px; text-align: center; }
-
-        /* Kanal knapper styling */
-        .channel-nav { margin-bottom: 20px; display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
-        .channel-link { 
-            padding: 10px 20px; 
-            cursor: pointer; 
-            border-radius: 5px; 
-            border: 1px solid #333; 
-            background: #fff;
-            font-weight: bold;
-            text-decoration: none;
-            color: black;
-            display: inline-block;
-        }
-        .channel-link:hover {
-            background: #e0e0e0;
-        }
-
-        .shrimp-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
             justify-content: center;
-            flex-grow: 1;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
         }
 
-        .rotating-shrimp {
-            width: 500px; 
-            max-width: 85vw;
-            height: auto;
-            cursor: pointer;
-            animation: spin 3s linear infinite;
-            user-select: none;
-            -webkit-user-drag: none;
-        }
-
-        .fast-spin { animation: spin 0.1s linear infinite !important; }
-
-        #timer {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: #333;
+        .leaderboard {
             background: white;
-            padding: 20px 40px;
-            border-radius: 60px;
+            padding: 30px;
+            border-radius: 15px;
+            width: 350px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            margin-top: 40px;
-            margin-bottom: 50px;
-            pointer-events: none; 
         }
 
-        @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
         }
+
+        .player {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 8px;
+            background: #eee;
+            font-weight: bold;
+        }
+
+        /* Top 3 farver */
+        .gold { background: gold; }
+        .silver { background: silver; }
+        .bronze { background: #cd7f32; color: white; }
     </style>
 </head>
 <body>
 
-    <h1>Den 27/03-2026 udkommer afsnit 3 af Minecraft ifølge religioner</h1>
-    <p>Jøde Edition....</p>
+<div class="leaderboard">
+    <h1>Leaderboard</h1>
 
-    <div class="channel-nav">
-        <a href="alex.html" class="channel-link">Alex</a>
-        <a href="rallemis.html" class="channel-link">Rallemis</a>
-        <a href="jeppemis.html" class="channel-link">Jeppemis</a>
-        <a href="biamis.html" class="channel-link">Biamis</a>
-        <a href="bastian.html" class="channel-link">Mobning af bastian</a>
-    </div>
+    <!-- HER ÆNDRER DU NAVN + POINT -->
 
-    <div class="shrimp-container">
-        <img src="shrimp.png" alt="Roterende reje" class="rotating-shrimp" id="shrimp">
-        <div id="timer">Tid på siden: 0s</div>
-    </div>
+    <div class="player gold">1. Alex - 1500</div>
+    <div class="player silver">2. Rallemis - 1400</div>
+    <div class="player bronze">3. Jeppemis - 1300</div>
 
-    <script>
-        (function() {
-            const startTime = Date.now();
-            const timerElement = document.getElementById('timer');
-            const shrimp = document.getElementById('shrimp');
+    <div class="player">4. Biamis - 1200</div>
+    <div class="player">5. Bastian - 1100</div>
+    <div class="player">6. Player6 - 1000</div>
+    <div class="player">7. Player7 - 900</div>
+    <div class="player">8. Player8 - 800</div>
+    <div class="player">9. Player9 - 700</div>
+    <div class="player">10. Player10 - 600</div>
 
-            const updateTimer = () => {
-                const now = Date.now();
-                const differenceInSeconds = Math.floor((now - startTime) / 1000);
-                const correctText = "Tid på siden: " + differenceInSeconds + "s";
-                
-                if (timerElement.innerText !== correctText) {
-                    timerElement.innerText = correctText;
-                }
-            };
-
-            setInterval(updateTimer, 50);
-
-            const observer = new MutationObserver(() => {
-                updateTimer();
-            });
-
-            observer.observe(timerElement, {
-                characterData: true,
-                childList: true,
-                subtree: true
-            });
-
-            const startFast = () => shrimp.classList.add('fast-spin');
-            const stopFast = () => shrimp.classList.remove('fast-spin');
-
-            shrimp.onmousedown = startFast;
-            shrimp.onmouseup = stopFast;
-            shrimp.onmouseleave = stopFast;
-            shrimp.ontouchstart = startFast;
-            shrimp.ontouchend = stopFast;
-
-            shrimp.oncontextmenu = (e) => e.preventDefault();
-            timerElement.oncontextmenu = (e) => e.preventDefault();
-        })();
-    </script>
+</div>
 
 </body>
 </html>
